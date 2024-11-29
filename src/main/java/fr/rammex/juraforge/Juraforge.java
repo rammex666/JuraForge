@@ -4,7 +4,7 @@ import fr.rammex.juraforge.commands.RunesCommand;
 import fr.rammex.juraforge.rune.RuneEffectListener;
 import fr.rammex.juraforge.rune.RuneMenu;
 import fr.rammex.juraforge.rune.RuneSetup;
-import fr.rammex.juraforge.runes.RuneManager;
+import fr.rammex.juraforge.rune.RuneManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;

@@ -1,6 +1,6 @@
 package fr.rammex.juraforge.rune;
 
-import fr.rammex.juraforge.runes.RuneManager;
+import fr.rammex.juraforge.rune.RuneManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

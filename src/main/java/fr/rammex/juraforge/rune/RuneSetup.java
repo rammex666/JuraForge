@@ -1,6 +1,6 @@
 package fr.rammex.juraforge.rune;
 
-import fr.rammex.juraforge.runes.RuneManager;
+import fr.rammex.juraforge.rune.RuneManager;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import java.util.Arrays;

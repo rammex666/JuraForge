@@ -1,4 +1,4 @@
-package fr.rammex.juraforge.runes;
+package fr.rammex.juraforge.rune;
 
 import fr.rammex.juraforge.rune.Runes;
 import org.bukkit.inventory.ItemStack;
