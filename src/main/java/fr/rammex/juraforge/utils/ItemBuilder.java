@@ -15,14 +15,6 @@ public class ItemBuilder {
         return it;
     }
 
-    public static ItemStack getEnchantItem(ItemStack material, String customName,Boolean enchant) {
-        ItemStack it = new ItemStack(material);
-        ItemMeta customM = it.getItemMeta();
-        if (customName != null) customM.setDisplayName(customName);
-        if (enchant) it.addEnchantment(org.bukkit.enchantments.Enchantment.DURABILITY, 1);
-        it.setItemMeta(customM);
-        return it;
-    }
 
     public static ItemStack getSimpleItem(ItemStack material, String customName) {
         ItemStack it = new ItemStack(material);
