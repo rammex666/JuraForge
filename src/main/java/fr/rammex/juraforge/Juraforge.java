@@ -36,8 +36,9 @@ public final class Juraforge extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new RuneEffectListener(runeManager), this);
 
 
-        // setup the runes
-        RuneSetup.setupRunes();
+        saveDefaultConfig();
+        RuneSetup runeSetup = new RuneSetup(this, runeManager);
+        runeSetup.setupRunes();
 
         // Load yaml files
         loadFiles();

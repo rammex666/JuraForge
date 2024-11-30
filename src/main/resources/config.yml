@@ -1,0 +1,34 @@
+effects:
+  Vascel:
+    cooldown: 60 # in seconds
+    message: "You have been teleported !"
+    sound: "ENTITY_ENDERMAN_TELEPORT"
+    max_distance: 100
+
+runes:
+  rune1:
+    name: "Rune of Teleportation"
+    allowed_items:
+      - "DIAMOND_SWORD"
+      - "IRON_SWORD"
+    level: 1
+    is_upgradeable: true
+    effects:
+      - type: "Vascel"
+        onHoldItem: false
+        onEquip: false
+        onPlayerInteract: true
+  rune2:
+    name: "Rune of Strength"
+    allowed_items:
+      - "DIAMOND_AXE"
+      - "IRON_AXE"
+    level: 2
+    is_upgradeable: false
+    effects:
+      - type: "StrengthBoost"
+        duration: 120
+        amplifier: 2
+        onHoldItem: true
+        onEquip: false
+        onPlayerInteract: false

@@ -67,14 +67,13 @@ public class RuneMenu {
                     if (cursorItem != null && cursorItem.getType() != Material.AIR) {
                         Runes rune = runeManager.getRune(cursorItem.getItemMeta().getDisplayName());
                         if (rune != null && runeManager.canApplyRune(itemStack, rune)) {
-                            runeManager.applyRune(itemStack, rune);
+                            Runes existingRune = runeManager.getRuneFromItem(itemStack);
+                            if (existingRune != null && existingRune.getName().equals(rune.getName()) && existingRune.getLevel() == rune.getLevel() && existingRune.getIsUpgradeable()) {
+                                runeManager.upgradeRune(itemStack, existingRune);
+                            } else {
+                                runeManager.applyRune(itemStack, rune);
+                            }
                             event.getWhoClicked().setItemOnCursor(null);
-                        }
-                    } else if (clickedItem != null && clickedItem.getType() != Material.AIR) {
-                        Runes rune = runeManager.getRune(clickedItem.getItemMeta().getDisplayName());
-                        if (rune != null) {
-                            runeManager.removeRune(itemStack, rune);
-                            event.getWhoClicked().setItemOnCursor(new ItemStack(Material.PAPER)); // Example item for the removed rune
                         }
                     }
                 }

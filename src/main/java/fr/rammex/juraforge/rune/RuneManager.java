@@ -48,6 +48,24 @@ public class RuneManager {
         }
     }
 
+    public void upgradeRune(ItemStack item, Runes rune) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            List<String> lore = meta.getLore();
+            if (lore != null) {
+                for (int i = 0; i < lore.size(); i++) {
+                    if (lore.get(i).startsWith("Rune: " + rune.getName())) {
+                        int currentLevel = rune.getLevel();
+                        lore.set(i, "Rune: " + rune.getName() + " - " + (currentLevel + 1));
+                        meta.setLore(lore);
+                        item.setItemMeta(meta);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     public Runes getRune(String name) {
         return runes.get(name);
     }

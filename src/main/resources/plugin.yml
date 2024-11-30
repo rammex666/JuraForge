@@ -2,3 +2,7 @@ name: juraforge
 version: '1.0'
 main: fr.rammex.juraforge.Juraforge
 api-version: '1.20'
+commands:
+  runes:
+    description: commande rune
+    permission: juraforge.runes
