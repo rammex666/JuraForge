@@ -57,7 +57,7 @@ public class RuneEffectListener implements Listener {
             Runes rune = runeManager.getRuneFromItem(item);
             if (rune != null) {
                 for (CustomEffect effect : rune.getOnPlayerInteractEffects()) {
-                    effect.apply(player);
+                    effect.apply(player, rune.getLevel());
                 }
             }
         }
@@ -68,7 +68,7 @@ public class RuneEffectListener implements Listener {
         if (rune != null) {
             List<CustomEffect> effects = getEffectsByType(rune, effectType);
             for (CustomEffect effect : effects) {
-                effect.apply(player);
+                effect.apply(player, rune.getLevel());
             }
         }
     }
@@ -78,7 +78,7 @@ public class RuneEffectListener implements Listener {
         if (rune != null) {
             List<CustomEffect> effects = getEffectsByType(rune, effectType);
             for (CustomEffect effect : effects) {
-                effect.remove(player);
+                effect.remove(player, rune.getLevel());
             }
         }
     }

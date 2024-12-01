@@ -11,7 +11,7 @@ import static fr.rammex.juraforge.rune.RuneSetup.plugin;
 
 public class VascelEffect implements CustomEffect {
     private static final int MAX_DISTANCE = plugin.getConfig().getInt("effects.Vascel.max_distance");
-    private static final long COOLDOWN_TIME = plugin.getConfig().getInt("effects.Vascel.coldown");// 60 seconds in milliseconds
+    private static final long COOLDOWN_TIME = plugin.getConfig().getInt("effects.Vascel.coldown")*1000;
     private final Map<UUID, Long> lastUseTime = new HashMap<>();
     private Location targetLocation;
 
@@ -22,7 +22,7 @@ public class VascelEffect implements CustomEffect {
 
 
     @Override
-    public void apply(Player player) {
+    public void apply(Player player, int level) {
         UUID playerId = player.getUniqueId();
         long currentTime = System.currentTimeMillis();
         targetLocation = player.getTargetBlockExact(MAX_DISTANCE).getLocation();
@@ -48,7 +48,7 @@ public class VascelEffect implements CustomEffect {
     }
 
     @Override
-    public void remove(Player player) {
+    public void remove(Player player, int level) {
     }
 
 }

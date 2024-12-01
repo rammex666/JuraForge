@@ -6,29 +6,83 @@ effects:
     max_distance: 100
 
 runes:
-  rune1:
-    name: "Rune of Teleportation"
+  vitesse1:
+    name: "Vitesse"
     allowed_items:
-      - "DIAMOND_SWORD"
-      - "IRON_SWORD"
+      - "LEATHER_BOOTS"
+      - "CHAINMAIL_BOOTS"
+      - "IRON_BOOTS"
+      - "GOLDEN_BOOTS"
+      - "DIAMOND_BOOTS"
+      - "NETHERITE_BOOTS"
     level: 1
     is_upgradeable: true
     effects:
-      - type: "Vascel"
+      - type: "Speed"
         onHoldItem: false
-        onEquip: false
-        onPlayerInteract: true
-  rune2:
-    name: "Rune of Strength"
+        onEquip: true
+        onPlayerInteract: false
+  vitesse2:
+    name: "Vitesse"
     allowed_items:
-      - "DIAMOND_AXE"
-      - "IRON_AXE"
+      - "LEATHER_BOOTS"
+      - "CHAINMAIL_BOOTS"
+      - "IRON_BOOTS"
+      - "GOLDEN_BOOTS"
+      - "DIAMOND_BOOTS"
+      - "NETHERITE_BOOTS"
     level: 2
+    is_upgradeable: true
+    effects:
+      - type: "Speed"
+        onHoldItem: false
+        onEquip: true
+        onPlayerInteract: false
+  vitesse3:
+    name: "Vitesse"
+    allowed_items:
+      - "LEATHER_BOOTS"
+      - "CHAINMAIL_BOOTS"
+      - "IRON_BOOTS"
+      - "GOLDEN_BOOTS"
+      - "DIAMOND_BOOTS"
+      - "NETHERITE_BOOTS"
+    level: 3
+    is_upgradeable: true
+    effects:
+      - type: "Speed"
+        onHoldItem: false
+        onEquip: true
+        onPlayerInteract: false
+  vitesse4:
+    name: "Vitesse"
+    allowed_items:
+      - "LEATHER_BOOTS"
+      - "CHAINMAIL_BOOTS"
+      - "IRON_BOOTS"
+      - "GOLDEN_BOOTS"
+      - "DIAMOND_BOOTS"
+      - "NETHERITE_BOOTS"
+    level: 4
+    is_upgradeable: true
+    effects:
+      - type: "Speed"
+        onHoldItem: false
+        onEquip: true
+        onPlayerInteract: false
+  vitesse5:
+    name: "Vitesse"
+    allowed_items:
+      - "LEATHER_BOOTS"
+      - "CHAINMAIL_BOOTS"
+      - "IRON_BOOTS"
+      - "GOLDEN_BOOTS"
+      - "DIAMOND_BOOTS"
+      - "NETHERITE_BOOTS"
+    level: 5
     is_upgradeable: false
     effects:
-      - type: "StrengthBoost"
-        duration: 120
-        amplifier: 2
-        onHoldItem: true
-        onEquip: false
+      - type: "Speed"
+        onHoldItem: false
+        onEquip: true
         onPlayerInteract: false

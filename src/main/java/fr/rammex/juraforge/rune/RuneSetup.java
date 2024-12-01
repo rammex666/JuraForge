@@ -1,6 +1,7 @@
 package fr.rammex.juraforge.rune;
 
 import fr.rammex.juraforge.rune.customeffects.CustomEffect;
+import fr.rammex.juraforge.rune.customeffects.SpeedEffect;
 import fr.rammex.juraforge.rune.customeffects.VascelEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -33,9 +34,14 @@ public class RuneSetup {
             for (Map<?, ?> effectMap : effectsList) {
                 String type = (String) effectMap.get("type");
                 CustomEffect effect = null;
+
                 if (type.equalsIgnoreCase("Vascel")) {
                     effect = new VascelEffect();
                 }
+                if (type.equalsIgnoreCase("Speed")) {
+                    effect = new SpeedEffect();
+                }
+
                 if (effect != null) {
                     effects.add(effect);
                     if (effectMap.containsKey("onHoldItem") && (boolean) effectMap.get("onHoldItem")) {

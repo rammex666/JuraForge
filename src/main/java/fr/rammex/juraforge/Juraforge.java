@@ -1,16 +1,10 @@
 package fr.rammex.juraforge;
 
 import fr.rammex.juraforge.commands.RunesCommand;
-import fr.rammex.juraforge.rune.RuneEffectListener;
-import fr.rammex.juraforge.rune.RuneMenu;
-import fr.rammex.juraforge.rune.RuneSetup;
-import fr.rammex.juraforge.rune.RuneManager;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,22 +17,9 @@ public final class Juraforge extends JavaPlugin {
     private FileConfiguration messagesConf;
     private File file;
 
-    public static Juraforge instance;
-
-
     @Override
     public void onEnable() {
-        instance = this;
-        RuneManager runeManager = new RuneManager();
         this.getCommand("runes").setExecutor(new RunesCommand());
-
-        Bukkit.getPluginManager().registerEvents((Listener) new RuneMenu(this, new RuneManager()), this);
-        Bukkit.getPluginManager().registerEvents(new RuneEffectListener(runeManager), this);
-
-
-        saveDefaultConfig();
-        RuneSetup runeSetup = new RuneSetup(this, runeManager);
-        runeSetup.setupRunes();
 
         // Load yaml files
         loadFiles();
@@ -96,5 +77,4 @@ public final class Juraforge extends JavaPlugin {
                 break;
         }
     }
-
 }
