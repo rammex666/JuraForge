@@ -3,8 +3,6 @@ package fr.rammex.juraforge.rune;
 import fr.rammex.juraforge.rune.customeffects.CustomEffect;
 import fr.rammex.juraforge.rune.customeffects.SpeedEffect;
 import fr.rammex.juraforge.rune.customeffects.VascelEffect;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,7 +12,7 @@ import java.util.Map;
 
 public class RuneSetup {
     public static JavaPlugin plugin;
-    private static RuneManager runeManager;
+    public static RuneManager runeManager;
 
     public RuneSetup(JavaPlugin plugin, RuneManager runeManager) {
         this.plugin = plugin;
@@ -37,9 +35,11 @@ public class RuneSetup {
 
                 if (type.equalsIgnoreCase("Vascel")) {
                     effect = new VascelEffect();
+                    plugin.getLogger().info("Vascel effect created");
                 }
                 if (type.equalsIgnoreCase("Speed")) {
                     effect = new SpeedEffect();
+                    plugin.getLogger().info("Speed effect created");
                 }
 
                 if (effect != null) {
@@ -62,6 +62,7 @@ public class RuneSetup {
 
             Runes rune = new Runes(name, effects, allowedItems, level, isUpgradeable, onHoldItemEffects, onEquipEffects, onPlayerInteractEffects);
             runeManager.registerRune(rune);
+            plugin.getLogger().info("Registered rune: " + name);
         }
     }
 }

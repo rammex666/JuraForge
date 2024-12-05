@@ -1,6 +1,7 @@
 package fr.rammex.juraforge.rune;
 
 import fr.rammex.juraforge.rune.Runes;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -69,6 +70,7 @@ public class RuneManager {
     public Runes getRune(String name) {
         return runes.get(name);
     }
+
     public Runes getRuneFromItem(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         if (meta != null && meta.getLore() != null) {
@@ -80,5 +82,15 @@ public class RuneManager {
             }
         }
         return null;
+    }
+
+    public ItemStack createRuneItem(Runes rune) {
+        ItemStack item = new ItemStack(Material.PAPER);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(rune.getName());
+            item.setItemMeta(meta);
+        }
+        return item;
     }
 }

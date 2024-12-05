@@ -63,6 +63,21 @@ public class RuneEffectListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onPlayerItemHeld(PlayerItemHeldEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = player.getInventory().getItemInMainHand();
+
+        if (item != null) {
+            Runes rune = runeManager.getRuneFromItem(item);
+            if (rune != null) {
+                for (CustomEffect effect : rune.getOnPlayerInteractEffects()) {
+                    effect.apply(player, rune.getLevel());
+                }
+            }
+        }
+    }
+
     private void applyRuneEffects(Player player, ItemStack item, String effectType) {
         Runes rune = runeManager.getRuneFromItem(item);
         if (rune != null) {

@@ -4,14 +4,16 @@ import fr.rammex.juraforge.rune.RuneManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class RuneMenu {
+public class RuneMenu implements Listener {
     private final JavaPlugin plugin;
     private final RuneManager runeManager;
     private static final int ITEM_SLOT = 10;
@@ -48,12 +50,12 @@ public class RuneMenu {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getView().getTitle().equals("Apply Rune")) {
-            event.setCancelled(true);
             ItemStack clickedItem = event.getCurrentItem();
             ItemStack cursorItem = event.getCursor();
             Inventory inventory = event.getInventory();
 
             if (event.getSlot() == ITEM_SLOT) {
+                event.setCancelled(true);
                 if (cursorItem != null && cursorItem.getType() != Material.AIR) {
                     inventory.setItem(ITEM_SLOT, cursorItem.clone());
                     event.getWhoClicked().setItemOnCursor(null);
@@ -62,6 +64,7 @@ public class RuneMenu {
                     inventory.setItem(ITEM_SLOT, null);
                 }
             } else if (event.getSlot() == RUNE_SLOT) {
+                event.setCancelled(true);
                 ItemStack itemStack = inventory.getItem(ITEM_SLOT);
                 if (itemStack != null && itemStack.getType() != Material.AIR) {
                     if (cursorItem != null && cursorItem.getType() != Material.AIR) {
@@ -77,6 +80,8 @@ public class RuneMenu {
                         }
                     }
                 }
+            } else if (clickedItem != null && (clickedItem.getType() == Material.GREEN_STAINED_GLASS_PANE || clickedItem.getType() == Material.GRAY_STAINED_GLASS_PANE)) {
+                event.setCancelled(true);
             }
         }
     }

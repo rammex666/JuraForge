@@ -9,7 +9,7 @@ public class LifeEffect implements CustomEffect {
     public void apply(Player player, int level) {
         player.setHealth(player.getHealth() + level + 4);
         if(level == 5) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, Integer.MAX_VALUE, 1, true, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1, true, false));
         }
     }
 
@@ -17,7 +17,7 @@ public class LifeEffect implements CustomEffect {
     public void remove(Player player, int level) {
         player.setHealth(player.getHealth() - level - 4);
         if(level == 5){
-            player.removePotionEffect(PotionEffectType.HEAL);
+            player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
         }
     }
 }
