@@ -30,6 +30,10 @@ public class RunesCommand implements CommandExecutor {
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("give")) {
+            if(!player.hasPermission("runes.give")) {
+                player.sendMessage("You do not have permission to use this command.");
+                return false;
+            }
             String runeName = args[1];
 
             Runes rune = runeManager.getRune(runeName);
