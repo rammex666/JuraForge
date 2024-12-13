@@ -1,10 +1,14 @@
 package fr.rammex.juraforge;
 
+import dev.aurelium.auraskills.api.AuraSkillsApi;
+import dev.aurelium.auraskills.api.AuraSkillsProvider;
 import fr.rammex.juraforge.commands.RunesCommand;
 import fr.rammex.juraforge.rune.RuneEffectListener;
 import fr.rammex.juraforge.rune.RuneManager;
 import fr.rammex.juraforge.rune.RuneMenu;
 import fr.rammex.juraforge.rune.RuneSetup;
+import fr.rammex.juraforge.rune.customeffects.AitherEffect;
+import fr.rammex.juraforge.rune.customeffects.GroundEffect;
 import lombok.Getter;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,8 +31,18 @@ public final class Juraforge extends JavaPlugin {
         this.getCommand("runes").setExecutor(new RunesCommand(runeManager));
 
         getServer().getPluginManager().registerEvents(new RuneMenu(this, runeManager), this);
-        getServer().getPluginManager().registerEvents(new RuneEffectListener(runeManager), this);
+        getServer().getPluginManager().registerEvents(new RuneEffectListener(this, runeManager), this);
+        getServer().getPluginManager().registerEvents(new AitherEffect(), this);
 
+
+        AuraSkillsApi auraSkillsApi = AuraSkillsProvider.getInstance();
+        if (auraSkillsApi == null) {
+            getLogger().severe("Failed to initialize AuraSkillsApi! Disabling Juraforge.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        GroundEffect groundEffect = new GroundEffect(this);
 
         // Load yaml files
         loadFiles();

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RuneManager {
-    private final Map<String, Runes> runes = new HashMap<>();
+    private static final Map<String, Runes> runes = new HashMap<>();
 
     public void registerRune(Runes rune) {
         runes.put(rune.getName(), rune);
@@ -67,16 +67,19 @@ public class RuneManager {
         }
     }
 
-    public Runes getRune(String name) {
+    public static Runes getRune(String name) {
         return runes.get(name);
     }
 
     public Runes getRuneFromItem(ItemStack item) {
+        System.out.println("Getting rune from item");
         ItemMeta meta = item.getItemMeta();
         if (meta != null && meta.getLore() != null) {
             for (String lore : meta.getLore()) {
                 if (lore.startsWith("Rune: ")) {
-                    String runeName = lore.substring(6);
+                    String[] parts = lore.substring(6).split(" - ");
+                    String runeName = parts[0];
+                    System.out.println("Rune name: " + runeName);
                     return getRune(runeName);
                 }
             }

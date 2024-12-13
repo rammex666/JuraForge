@@ -1,6 +1,7 @@
 package fr.rammex.juraforge.rune;
 
 import fr.rammex.juraforge.rune.customeffects.CustomEffect;
+import fr.rammex.juraforge.rune.customeffects.LifeEffect;
 import fr.rammex.juraforge.rune.customeffects.SpeedEffect;
 import fr.rammex.juraforge.rune.customeffects.VascelEffect;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -33,14 +34,21 @@ public class RuneSetup {
                 String type = (String) effectMap.get("type");
                 CustomEffect effect = null;
 
-                if (type.equalsIgnoreCase("Vascel")) {
-                    effect = new VascelEffect();
-                    plugin.getLogger().info("Vascel effect created");
+                switch (type) {
+                    case "Vascel":
+                        effect = new VascelEffect();
+                        plugin.getLogger().info("Vascel effect created");
+                        break;
+                    case "Speed":
+                        effect = new SpeedEffect();
+                        plugin.getLogger().info("Speed effect created");
+                        break;
+                    case "Life":
+                        effect = new LifeEffect();
+                        plugin.getLogger().info("Life effect created");
+                        break;
                 }
-                if (type.equalsIgnoreCase("Speed")) {
-                    effect = new SpeedEffect();
-                    plugin.getLogger().info("Speed effect created");
-                }
+
 
                 if (effect != null) {
                     effects.add(effect);

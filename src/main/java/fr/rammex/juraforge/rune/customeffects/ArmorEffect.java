@@ -10,8 +10,8 @@ public class ArmorEffect implements CustomEffect{
     public void apply(Player player, int level) {
         AttributeInstance armorAttribute = player.getAttribute(Attribute.GENERIC_ARMOR);
         if (armorAttribute != null) {
-            double baseArmor = 0.0; // Default base armor in Minecraft
-            double newArmor = baseArmor + level; // Increase armor based on level
+            double baseArmor = 0.0;
+            double newArmor = baseArmor + level;
             armorAttribute.setBaseValue(newArmor);
         }
     }
@@ -20,7 +20,7 @@ public class ArmorEffect implements CustomEffect{
     public void remove(Player player, int level) {
         AttributeInstance armorAttribute = player.getAttribute(Attribute.GENERIC_ARMOR);
         if (armorAttribute != null) {
-            armorAttribute.setBaseValue(0.0); // Reset to default base armor
+            armorAttribute.setBaseValue(0.0);
         }
     }
 }
