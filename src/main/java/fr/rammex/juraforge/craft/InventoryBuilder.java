@@ -9,11 +9,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class InventoryBuilder {
 
-    public void buildCraftRuneTable(Player player) {
-        Inventory inventory = Bukkit.createInventory(player, 45, "Rune Crafter");
+    public static void buildCraftRuneTable(Player player) {
+        Inventory inventory = Bukkit.createInventory(player, 45, "§c§lForge Runic");
 
-        ItemStack fill1Item = new ItemStack(Material.MAGENTA_STAINED_GLASS_PANE);
-        ItemStack fill2Item = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+        ItemStack fill1Item = new ItemStack(Material.ORANGE_STAINED_GLASS_PANE);
+        ItemStack fill2Item = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
 
         ItemMeta fill1Meta = fill1Item.getItemMeta();
         ItemMeta fill2Meta = fill2Item.getItemMeta();
@@ -36,6 +36,8 @@ public class InventoryBuilder {
 
         }
 
+
+        player.openInventory(inventory);
     }
 
     private static boolean isEven(int number) {

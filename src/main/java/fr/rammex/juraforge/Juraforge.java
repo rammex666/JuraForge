@@ -2,7 +2,9 @@ package fr.rammex.juraforge;
 
 import dev.aurelium.auraskills.api.AuraSkillsApi;
 import dev.aurelium.auraskills.api.AuraSkillsProvider;
+import fr.rammex.juraforge.commands.ForgeGiveCommand;
 import fr.rammex.juraforge.commands.RunesCommand;
+import fr.rammex.juraforge.craft.events.CraftRuneTableListener;
 import fr.rammex.juraforge.rune.RuneEffectListener;
 import fr.rammex.juraforge.rune.RuneManager;
 import fr.rammex.juraforge.rune.RuneMenu;
@@ -29,10 +31,13 @@ public final class Juraforge extends JavaPlugin {
     public void onEnable() {
         RuneManager runeManager = new RuneManager();
         this.getCommand("runes").setExecutor(new RunesCommand(runeManager));
+        this.getCommand("forgegive").setExecutor(new ForgeGiveCommand());
 
         getServer().getPluginManager().registerEvents(new RuneMenu(this, runeManager), this);
         getServer().getPluginManager().registerEvents(new RuneEffectListener(this, runeManager), this);
         getServer().getPluginManager().registerEvents(new AitherEffect(), this);
+
+        getServer().getPluginManager().registerEvents(new CraftRuneTableListener(), this);
 
 
         AuraSkillsApi auraSkillsApi = AuraSkillsProvider.getInstance();

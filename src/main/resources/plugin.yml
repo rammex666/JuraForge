@@ -7,3 +7,6 @@ commands:
   runes:
     description: commande rune
     permission: juraforge.runes
+  forgegive:
+    description: commande forgegive
+    permission: juraforge.forgegive
