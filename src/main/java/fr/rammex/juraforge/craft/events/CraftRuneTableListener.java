@@ -1,6 +1,7 @@
 package fr.rammex.juraforge.craft.events;
 
 import fr.rammex.juraforge.craft.InventoryBuilder;
+import fr.rammex.juraforge.craft.PaternChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -93,17 +94,44 @@ public class CraftRuneTableListener implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event){
-        List<Integer> craftSlots = new ArrayList<Integer>();
+    public void onInventoryClick(InventoryClickEvent event) {
+        List<Integer> craftSlots = new ArrayList<>();
         String inventoryName = event.getView().getTitle();
-        if(inventoryName.equals(ChatColor.translateAlternateColorCodes('&', "&c&lForge Runic"))){
+        if (inventoryName.equals(ChatColor.translateAlternateColorCodes('&', "&c&lForge Runic"))) {
+
             craftSlots.add(10);
-            if(event.getCurrentItem().getType() == Material.YELLOW_STAINED_GLASS_PANE || event.getCurrentItem().getType() == Material.ORANGE_STAINED_GLASS_PANE){
+            craftSlots.add(11);
+            craftSlots.add(12);
+            craftSlots.add(19);
+            craftSlots.add(20);
+            craftSlots.add(21);
+            craftSlots.add(28);
+            craftSlots.add(29);
+            craftSlots.add(30);
+            int restrictedSlot = 25;
+
+            if (event.getCurrentItem() != null && (event.getCurrentItem().getType() == Material.YELLOW_STAINED_GLASS_PANE || event.getCurrentItem().getType() == Material.ORANGE_STAINED_GLASS_PANE)) {
                 event.setCancelled(true);
             } else {
-                if(event.getSlot() == 25){
-                    for(int slot : craftSlots){
+                if (event.getSlot() == restrictedSlot && event.getCursor() != null && event.getCursor().getType() != Material.AIR) {
+                    event.setCancelled(true);
+                } else if (event.getSlot() == restrictedSlot && event.getCurrentItem().getType() != Material.AIR) {
+                    for (int slot : craftSlots) {
                         event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+                    }
+                } else {
+                    for (int slot : craftSlots) {
+                        if (event.getSlot() == slot) {
+                            event.getInventory().setItem(restrictedSlot, PaternChecker.checkPatern(event.getInventory().getItem(10),
+                                    event.getInventory().getItem(11),
+                                    event.getInventory().getItem(12),
+                                    event.getInventory().getItem(19),
+                                    event.getInventory().getItem(20),
+                                    event.getInventory().getItem(21),
+                                    event.getInventory().getItem(28),
+                                    event.getInventory().getItem(29),
+                                    event.getInventory().getItem(30)));
+                        }
                     }
                 }
             }
