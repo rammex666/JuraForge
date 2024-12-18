@@ -1,3 +1,5 @@
+# types : Vascel, Speed, Life, Aither, Armor, Aspis, FireResistance, Force, Ground, NoDamageFall, Pur, Vigueur, Watter
+
 effects:
   Vascel:
     cooldown: 60 # in seconds
