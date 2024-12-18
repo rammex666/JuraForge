@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
+
 public class RuneMenu implements Listener {
     private final JavaPlugin plugin;
     private final RuneManager runeManager;
@@ -68,15 +70,24 @@ public class RuneMenu implements Listener {
                 ItemStack itemStack = inventory.getItem(ITEM_SLOT);
                 if (itemStack != null && itemStack.getType() != Material.AIR) {
                     if (cursorItem != null && cursorItem.getType() != Material.AIR) {
-                        Runes rune = runeManager.getRune(cursorItem.getItemMeta().getDisplayName());
-                        if (rune != null && runeManager.canApplyRune(itemStack, rune)) {
-                            Runes existingRune = runeManager.getRuneFromItem(itemStack);
-                            if (existingRune != null && existingRune.getName().equals(rune.getName()) && existingRune.getLevel() == rune.getLevel() && existingRune.getIsUpgradeable()) {
-                                runeManager.upgradeRune(itemStack, existingRune);
-                            } else {
-                                runeManager.applyRune(itemStack, rune);
+                        ItemMeta meta = cursorItem.getItemMeta();
+                        if (meta != null && meta.hasLore()) {
+                            List<String> lore = meta.getLore();
+                            if (lore != null && !lore.isEmpty()) {
+                                String levelLine = lore.get(0);
+                                int runeLevel = Integer.parseInt(levelLine.split(": ")[1]);
+                                String runeId = RuneManager.getRuneIdByNameAndLevel(meta.getDisplayName(), runeLevel);
+                                Runes rune = RuneManager.getRune(runeId);
+                                if (rune != null && rune.getLevel() == runeLevel && runeManager.canApplyRune(itemStack, rune)) {
+                                    Runes existingRune = runeManager.getRuneFromItem(itemStack);
+                                    if (existingRune != null && existingRune.getId().equals(rune.getId()) && existingRune.getLevel() == rune.getLevel() && existingRune.getIsUpgradeable()) {
+                                        runeManager.upgradeRune(itemStack, existingRune);
+                                    } else {
+                                        runeManager.applyRune(itemStack, rune);
+                                    }
+                                    event.getWhoClicked().setItemOnCursor(null);
+                                }
                             }
-                            event.getWhoClicked().setItemOnCursor(null);
                         }
                     }
                 }

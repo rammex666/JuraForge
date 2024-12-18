@@ -103,9 +103,9 @@ public class RuneSetup {
             int level = config.getInt("runes." + key + ".level");
             boolean isUpgradeable = config.getBoolean("runes." + key + ".is_upgradeable");
 
-            Runes rune = new Runes(name, effects, allowedItems, level, isUpgradeable, onHoldItemEffects, onEquipEffects, onPlayerInteractEffects);
+            Runes rune = new Runes(key, name, effects, allowedItems, level, isUpgradeable, onHoldItemEffects, onEquipEffects, onPlayerInteractEffects);
             runeManager.registerRune(rune);
-            plugin.getLogger().info("Registered rune: " + name);
+            plugin.getLogger().info("Registered rune: " + key);
         }
     }
 }

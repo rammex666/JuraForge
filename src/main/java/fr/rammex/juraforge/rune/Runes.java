@@ -12,9 +12,11 @@ public class Runes {
     private final List<CustomEffect> onHoldItemEffects;
     private final List<CustomEffect> onEquipEffects;
     private final List<CustomEffect> onPlayerInteractEffects;
+    private final String id;
 
-    public Runes(String name, List<CustomEffect> effects, List<String> allowedItems, Integer level, Boolean isUpgradeable,
+    public Runes(String id, String name, List<CustomEffect> effects, List<String> allowedItems, Integer level, Boolean isUpgradeable,
                  List<CustomEffect> onHoldItemEffects, List<CustomEffect> onEquipEffects, List<CustomEffect> onPlayerInteractEffects) {
+        this.id = id;
         this.name = name;
         this.effects = effects;
         this.allowedItems = allowedItems;
@@ -23,6 +25,10 @@ public class Runes {
         this.onHoldItemEffects = onHoldItemEffects;
         this.onEquipEffects = onEquipEffects;
         this.onPlayerInteractEffects = onPlayerInteractEffects;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

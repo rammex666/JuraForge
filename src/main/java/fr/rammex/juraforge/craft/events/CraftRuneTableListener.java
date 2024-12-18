@@ -95,42 +95,44 @@ public class CraftRuneTableListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        List<Integer> craftSlots = new ArrayList<>();
+        List<Integer> craftSlots = List.of(10, 11, 12, 19, 20, 21, 28, 29, 30);
         String inventoryName = event.getView().getTitle();
         if (inventoryName.equals(ChatColor.translateAlternateColorCodes('&', "&c&lForge Runic"))) {
 
-            craftSlots.add(10);
-            craftSlots.add(11);
-            craftSlots.add(12);
-            craftSlots.add(19);
-            craftSlots.add(20);
-            craftSlots.add(21);
-            craftSlots.add(28);
-            craftSlots.add(29);
-            craftSlots.add(30);
+            ItemStack currentItem = event.getCurrentItem();
+            if (currentItem == null || currentItem.getType() == Material.AIR) {
+                return;
+            }
+
             int restrictedSlot = 25;
 
-            if (event.getCurrentItem() != null && (event.getCurrentItem().getType() == Material.YELLOW_STAINED_GLASS_PANE || event.getCurrentItem().getType() == Material.ORANGE_STAINED_GLASS_PANE)) {
+            if (currentItem.getType() == Material.YELLOW_STAINED_GLASS_PANE || currentItem.getType() == Material.ORANGE_STAINED_GLASS_PANE) {
                 event.setCancelled(true);
             } else {
                 if (event.getSlot() == restrictedSlot && event.getCursor() != null && event.getCursor().getType() != Material.AIR) {
                     event.setCancelled(true);
-                } else if (event.getSlot() == restrictedSlot && event.getCurrentItem().getType() != Material.AIR) {
+                } else if (event.getSlot() == restrictedSlot && currentItem.getType() != Material.AIR) {
                     for (int slot : craftSlots) {
                         event.getInventory().setItem(slot, new ItemStack(Material.AIR));
                     }
                 } else {
                     for (int slot : craftSlots) {
                         if (event.getSlot() == slot) {
-                            event.getInventory().setItem(restrictedSlot, PaternChecker.checkPatern(event.getInventory().getItem(10),
-                                    event.getInventory().getItem(11),
-                                    event.getInventory().getItem(12),
-                                    event.getInventory().getItem(19),
-                                    event.getInventory().getItem(20),
-                                    event.getInventory().getItem(21),
-                                    event.getInventory().getItem(28),
-                                    event.getInventory().getItem(29),
-                                    event.getInventory().getItem(30)));
+                            ItemStack slot1 = event.getInventory().getItem(10) != null ? event.getInventory().getItem(10) : new ItemStack(Material.AIR);
+                            ItemStack slot2 = event.getInventory().getItem(11) != null ? event.getInventory().getItem(11) : new ItemStack(Material.AIR);
+                            ItemStack slot3 = event.getInventory().getItem(12) != null ? event.getInventory().getItem(12) : new ItemStack(Material.AIR);
+                            ItemStack slot4 = event.getInventory().getItem(19) != null ? event.getInventory().getItem(19) : new ItemStack(Material.AIR);
+                            ItemStack slot5 = event.getInventory().getItem(20) != null ? event.getInventory().getItem(20) : new ItemStack(Material.AIR);
+                            ItemStack slot6 = event.getInventory().getItem(21) != null ? event.getInventory().getItem(21) : new ItemStack(Material.AIR);
+                            ItemStack slot7 = event.getInventory().getItem(28) != null ? event.getInventory().getItem(28) : new ItemStack(Material.AIR);
+                            ItemStack slot8 = event.getInventory().getItem(29) != null ? event.getInventory().getItem(29) : new ItemStack(Material.AIR);
+                            ItemStack slot9 = event.getInventory().getItem(30) != null ? event.getInventory().getItem(30) : new ItemStack(Material.AIR);
+
+                            if (slot1.getType() != Material.AIR && slot2.getType() != Material.AIR && slot3.getType() != Material.AIR &&
+                                    slot4.getType() != Material.AIR && slot5.getType() != Material.AIR && slot6.getType() != Material.AIR &&
+                                    slot7.getType() != Material.AIR && slot8.getType() != Material.AIR && slot9.getType() != Material.AIR) {
+                                event.getInventory().setItem(restrictedSlot, PaternChecker.checkPatern(slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9));
+                            }
                         }
                     }
                 }
