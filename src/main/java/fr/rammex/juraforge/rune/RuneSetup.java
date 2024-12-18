@@ -1,9 +1,7 @@
 package fr.rammex.juraforge.rune;
 
-import fr.rammex.juraforge.rune.customeffects.CustomEffect;
-import fr.rammex.juraforge.rune.customeffects.LifeEffect;
-import fr.rammex.juraforge.rune.customeffects.SpeedEffect;
-import fr.rammex.juraforge.rune.customeffects.VascelEffect;
+import fr.rammex.juraforge.Juraforge;
+import fr.rammex.juraforge.rune.customeffects.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +33,7 @@ public class RuneSetup {
                 CustomEffect effect = null;
 
                 switch (type) {
+                    // types : Vascel, Speed, Life, Aither, Armor, Aspis, FireResistance, Force, Ground, NoDamageFall, Pur, Vigueur, Watter
                     case "Vascel":
                         effect = new VascelEffect();
                         plugin.getLogger().info("Vascel effect created");
@@ -43,9 +42,45 @@ public class RuneSetup {
                         effect = new SpeedEffect();
                         plugin.getLogger().info("Speed effect created");
                         break;
-                    case "Life":
-                        effect = new LifeEffect();
-                        plugin.getLogger().info("Life effect created");
+                    case "Aither":
+                        effect = new AitherEffect();
+                        plugin.getLogger().info("Aither effect created");
+                        break;
+                    case "Armor":
+                        effect = new ArmorEffect();
+                        plugin.getLogger().info("Armor effect created");
+                        break;
+                    case "Aspis":
+                        effect = new AspisEffect();
+                        plugin.getLogger().info("Aspis effect created");
+                        break;
+                    case "FireResistance":
+                        effect = new FireResistanceEffect();
+                        plugin.getLogger().info("FireResistance effect created");
+                        break;
+                    case "Force":
+                        effect = new ForceEffect();
+                        plugin.getLogger().info("Force effect created");
+                        break;
+                    case "Ground":
+                        effect = new GroundEffect(Juraforge.instance);
+                        plugin.getLogger().info("Ground effect created");
+                        break;
+                    case "NoDamageFall":
+                        effect = new NoDamageFallEffect();
+                        plugin.getLogger().info("NoDamageFall effect created");
+                        break;
+                    case "Pur":
+                        effect = new PurEffect();
+                        plugin.getLogger().info("Pur effect created");
+                        break;
+                    case "Vigueur":
+                        effect = new VigueurEffect();
+                        plugin.getLogger().info("Vigueur effect created");
+                        break;
+                    case "Watter":
+                        effect = new WatterEffect();
+                        plugin.getLogger().info("Watter effect created");
                         break;
                 }
 

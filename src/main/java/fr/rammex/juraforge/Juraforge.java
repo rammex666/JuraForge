@@ -27,8 +27,11 @@ public final class Juraforge extends JavaPlugin {
     private FileConfiguration messagesConf;
     private File file;
 
+    public static Juraforge instance;
+
     @Override
     public void onEnable() {
+        instance = this;
         RuneManager runeManager = new RuneManager();
         this.getCommand("runes").setExecutor(new RunesCommand(runeManager));
         this.getCommand("forgegive").setExecutor(new ForgeGiveCommand());
