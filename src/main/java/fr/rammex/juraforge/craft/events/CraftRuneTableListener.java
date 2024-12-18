@@ -11,9 +11,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BoundingBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CraftRuneTableListener implements Listener {
 
@@ -85,6 +92,35 @@ public class CraftRuneTableListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event){
+        List<Integer> craftSlots = new ArrayList<Integer>();
+        String inventoryName = event.getView().getTitle();
+        if(inventoryName.equals(ChatColor.translateAlternateColorCodes('&', "&c&lForge Runic"))){
+            craftSlots.add(10);
+            if(event.getCurrentItem().getType() == Material.YELLOW_STAINED_GLASS_PANE || event.getCurrentItem().getType() == Material.ORANGE_STAINED_GLASS_PANE){
+                event.setCancelled(true);
+            } else {
+                if(event.getSlot() == 25){
+                    for(int slot : craftSlots){
+                        event.getInventory().setItem(slot, new ItemStack(Material.AIR));
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event){
+        if(event.getView().getTitle().equals(ChatColor.translateAlternateColorCodes('&',"&c&lForge Runic"))){
+            Inventory inv = event.getInventory();
+            for(int i = 0; i < inv.getSize(); i++){
+                if(inv.getItem(i) != null && inv.getItem(i).getType() != Material.YELLOW_STAINED_GLASS_PANE && inv.getItem(i).getType() != Material.ORANGE_STAINED_GLASS_PANE && i != 25){
+                    event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), inv.getItem(i));
+                }
+            }
+        }
+    }
 
 
     private void placeArmorStand(Location loc) {
