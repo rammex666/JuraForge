@@ -69,6 +69,11 @@ public class RuneMenu implements Listener {
             ItemStack cursorItem = event.getCursor();
             Inventory inventory = event.getInventory();
 
+
+            if (clickedItem == null || clickedItem.getType().isAir()) {
+                return;
+            }
+
             if (event.getSlot() == ITEM_SLOT) {
                 event.setCancelled(true);
                 if (cursorItem != null && cursorItem.getType() != Material.AIR) {
@@ -104,7 +109,8 @@ public class RuneMenu implements Listener {
                         }
                     }
                 }
-            } else if (clickedItem.getType() == Material.REDSTONE && clickedItem.getItemMeta().getDisplayName() == ChatColor.translateAlternateColorCodes('&',"&c&lConfig")) {
+            } else if (clickedItem.getType() == Material.REDSTONE && ChatColor.translateAlternateColorCodes('&', "&c&lConfig").equals(clickedItem.getItemMeta().getDisplayName())) {
+                event.setCancelled(true);
                 ConfigRunesMainMenu.getConfigRunesMenu((Player) event.getWhoClicked());
             } else if (clickedItem != null && (clickedItem.getType() == Material.GREEN_STAINED_GLASS_PANE || clickedItem.getType() == Material.GRAY_STAINED_GLASS_PANE)) {
                 event.setCancelled(true);

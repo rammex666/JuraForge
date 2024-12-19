@@ -120,8 +120,10 @@ public class RuneEffectListener implements Listener {
             List<CustomEffect> effects = getEffectsByType(rune, effectType);
             for (CustomEffect effect : effects) {
                 effect.apply(player, rune.getLevel());
-                plugin.getLogger().info("Applied rune effect: " + rune.getEffects() + " to player: " + player.getName() + " with item: " + item.getType());
+                plugin.getLogger().info("Applied rune effect: " + effect.getClass().getSimpleName() + " to player: " + player.getName() + " with item: " + item.getType());
             }
+        } else {
+            plugin.getLogger().info("No rune found for item: " + item.getType());
         }
     }
 

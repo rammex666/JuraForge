@@ -130,7 +130,7 @@ public class RuneManager {
         if (meta != null && meta.getLore() != null) {
             for (String lore : meta.getLore()) {
                 if (lore.startsWith(hex("&a✦ "))) {
-                    String[] parts = lore.substring(6).split(" - ");
+                    String[] parts = lore.substring(4).split(" - ");
                     String runeName = parts[0];
                     System.out.println("Rune name: " + runeName);
                     return getRuneFromName(runeName);

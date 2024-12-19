@@ -17,35 +17,35 @@ public class OnClickRuneConfigMenu implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         ItemStack clickedItem = event.getCurrentItem();
-        if(event.getView().getTitle().equals("§cConfig Runes")) {
+        if (event.getView().getTitle().equals("§cConfig Runes")) {
             event.setCancelled(true);
 
-            if(clickedItem.getType() == Material.SUNFLOWER){
+            if (clickedItem.getType() == Material.SUNFLOWER) {
                 String displayName = clickedItem.getItemMeta().getDisplayName();
                 List<String> lore = clickedItem.getItemMeta().getLore();
 
-                if(displayName != null && lore != null){
-                    String[] parts = lore.get(1).split("|");
-                    int level = Integer.parseInt(parts[1]);
-                    String[] parts2 = lore.get(2).split("|");
-                    String effect = parts2[1];
-                    String[] parts3 = lore.get(3).split("|");
-                    String id = parts3[1];
-                    String[] parts4 = lore.get(4).split("|");
-                    boolean upgradable = Boolean.parseBoolean(parts4[1]);
-                    String[] parts5 = lore.get(5).split("|");
-                    String allowedItem = parts5[1];
-                    for(int i = 6; i < lore.size(); i++){
-                        allowedItem += lore.get(i);
+                if (displayName != null && lore != null) {
+                    String[] parts = lore.get(1).split(ChatColor.translateAlternateColorCodes('&', "-&d"));
+                    if (parts.length > 1) {
+                        int level = Integer.parseInt(parts[1].trim()); // Trim the string before parsing
+                        String[] parts2 = lore.get(2).split(ChatColor.translateAlternateColorCodes('&', "-&d"));
+                        String effect = parts2[1];
+                        String[] parts3 = lore.get(3).split(ChatColor.translateAlternateColorCodes('&', "-&d"));
+                        String id = parts3[1];
+                        String[] parts4 = lore.get(4).split(ChatColor.translateAlternateColorCodes('&', "-&d"));
+                        boolean upgradable = Boolean.parseBoolean(parts4[1]);
+                        String[] parts5 = lore.get(5).split(ChatColor.translateAlternateColorCodes('&', "-&d"));
+                        String allowedItem = parts5[1];
+                        for (int i = 6; i < lore.size(); i++) {
+                            allowedItem += lore.get(i);
+                        }
+
+                        createRuneInventory(id, displayName, level, effect, upgradable, allowedItem);
+                    } else {
+                        System.err.println("Invalid lore format: " + lore.get(1));
                     }
-
-                    createRuneInventory(id, displayName, level, effect, upgradable, allowedItem);
-
-
                 }
-
             }
-
         }
     }
 
