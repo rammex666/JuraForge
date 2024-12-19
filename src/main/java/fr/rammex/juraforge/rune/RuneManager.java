@@ -14,7 +14,7 @@ import java.util.Map;
 import static fr.rammex.juraforge.utils.ColorUtils.hex;
 
 public class RuneManager {
-    private static final Map<String, Runes> runes = new HashMap<>();
+    public static final Map<String, Runes> runes = new HashMap<>();
 
     public void registerRune(Runes rune) {
         runes.put(rune.getId(), rune);

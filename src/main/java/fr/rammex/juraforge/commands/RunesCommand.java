@@ -46,8 +46,6 @@ public class RunesCommand implements CommandExecutor {
             }
             return true;
         }
-
-        player.sendMessage("Usage: /runes [give <runeName>]");
         return false;
     }
 }

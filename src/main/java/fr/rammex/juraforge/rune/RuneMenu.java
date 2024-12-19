@@ -2,7 +2,9 @@ package fr.rammex.juraforge.rune;
 
 import fr.rammex.juraforge.rune.RuneManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -20,6 +22,7 @@ public class RuneMenu implements Listener {
     private final RuneManager runeManager;
     private static final int ITEM_SLOT = 10;
     private static final int RUNE_SLOT = 16;
+    private static final int CONFIG_SLOT = 26;
 
     public RuneMenu(JavaPlugin plugin, RuneManager runeManager) {
         this.plugin = plugin;
@@ -41,6 +44,15 @@ public class RuneMenu implements Listener {
 
         for (int i = 0; i < inventory.getSize(); i++) {
             if (i == ITEM_SLOT || i == RUNE_SLOT) {
+                continue;
+            }
+            if (i == CONFIG_SLOT && player.hasPermission("juraforge.config")){
+                ItemStack configItem = new ItemStack(Material.REDSTONE);
+                ItemMeta configMeta = configItem.getItemMeta();
+                configMeta.setDisplayName("§c§lConfig");
+                configMeta.addEnchant(Enchantment.MENDING, 1, true);
+                configItem.setItemMeta(configMeta);
+                inventory.setItem(i, configItem);
                 continue;
             }
             inventory.setItem(i, (i % 2 == 0) ? greenItem : grayItem);
@@ -91,6 +103,8 @@ public class RuneMenu implements Listener {
                         }
                     }
                 }
+            } else if (clickedItem.getType() == Material.REDSTONE && clickedItem.getItemMeta().getDisplayName() == ChatColor.translateAlternateColorCodes('&',"&c&lConfig")) {
+
             } else if (clickedItem != null && (clickedItem.getType() == Material.GREEN_STAINED_GLASS_PANE || clickedItem.getType() == Material.GRAY_STAINED_GLASS_PANE)) {
                 event.setCancelled(true);
             }

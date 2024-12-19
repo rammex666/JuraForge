@@ -80,15 +80,12 @@ public class CraftRuneTableListener implements Listener {
                     if (entity instanceof ArmorStand) {
                         ArmorStand armorStand = (ArmorStand) entity;
                         if (ChatColor.translateAlternateColorCodes('&',"&c&lForge Runic").equals(armorStand.getCustomName())) {
-                            event.getPlayer().sendMessage("ArmorStand 'puf' found above the Smithing Table!");
                             event.setCancelled(true);
                             InventoryBuilder.buildCraftRuneTable(event.getPlayer());
                             return;
                         }
                     }
                 }
-
-                event.getPlayer().sendMessage("No ArmorStand named 'puf' found above the Smithing Table.");
             }
         }
     }
