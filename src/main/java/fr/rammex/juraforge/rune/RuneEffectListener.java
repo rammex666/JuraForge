@@ -56,13 +56,11 @@ public class RuneEffectListener implements Listener {
         for (ItemStack item : player.getInventory().getArmorContents()) {
             if (item != null) {
                 removeRuneEffects(player, item, "onEquip");
-                plugin.getLogger().info("Removed rune effects from armor");
             }
         }
         ItemStack heldItem = player.getInventory().getItemInMainHand();
         if (heldItem != null) {
             removeRuneEffects(player, heldItem, "onHoldItem");
-            plugin.getLogger().info("Removed rune effects from held item");
         }
     }
 
@@ -70,13 +68,11 @@ public class RuneEffectListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        plugin.getLogger().info("Player interact event");
         if (item != null) {
             Runes rune = runeManager.getRuneFromItem(item);
             if (rune != null) {
                 for (CustomEffect effect : rune.getOnPlayerInteractEffects()) {
                     effect.apply(player, rune.getLevel());
-                    plugin.getLogger().info("Applied rune effects on player interact");
                 }
             }
         }
@@ -86,14 +82,12 @@ public class RuneEffectListener implements Listener {
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        plugin.getLogger().info("Player item held event");
 
         if (item != null) {
             Runes rune = runeManager.getRuneFromItem(item);
             if (rune != null) {
                 for (CustomEffect effect : rune.getOnPlayerInteractEffects()) {
                     effect.apply(player, rune.getLevel());
-                    plugin.getLogger().info("Applied rune effects on player interact");
                 }
             }
         }
@@ -120,10 +114,8 @@ public class RuneEffectListener implements Listener {
             List<CustomEffect> effects = getEffectsByType(rune, effectType);
             for (CustomEffect effect : effects) {
                 effect.apply(player, rune.getLevel());
-                plugin.getLogger().info("Applied rune effect: " + effect.getClass().getSimpleName() + " to player: " + player.getName() + " with item: " + item.getType());
             }
         } else {
-            plugin.getLogger().info("No rune found for item: " + item.getType());
         }
     }
 
@@ -133,7 +125,6 @@ public class RuneEffectListener implements Listener {
             List<CustomEffect> effects = getEffectsByType(rune, effectType);
             for (CustomEffect effect : effects) {
                 effect.remove(player, rune.getLevel());
-                plugin.getLogger().info("Removed rune effect: " + rune.getEffects() + " from player: " + player.getName() + " with item: " + item.getType());
             }
         }
     }
@@ -143,16 +134,12 @@ public class RuneEffectListener implements Listener {
     private List<CustomEffect> getEffectsByType(Runes rune, String effectType) {
         switch (effectType) {
             case "onHoldItem":
-                plugin.getLogger().info("On hold item effects");
                 return rune.getOnHoldItemEffects();
             case "onEquip":
-                plugin.getLogger().info("On equip effects");
                 return rune.getOnEquipEffects();
             case "onPlayerInteract":
-                plugin.getLogger().info("On player interact effects");
                 return rune.getOnPlayerInteractEffects();
             default:
-                plugin.getLogger().info("Default effects");
                 return new ArrayList<>();
         }
     }

@@ -41,8 +41,6 @@ public class OnClickRuneConfigMenu implements Listener {
                         }
 
                         createRuneInventory(id, displayName, level, effect, upgradable, allowedItem);
-                    } else {
-                        System.err.println("Invalid lore format: " + lore.get(1));
                     }
                 }
             }

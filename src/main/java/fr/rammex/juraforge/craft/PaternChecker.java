@@ -50,9 +50,6 @@ public class PaternChecker {
         }
 
         if (matchesPattern(slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, "Speed")) {
-            System.out.println("Speed");
-            System.out.println(Juraforge.instance.getConfig().getString("craft.Speed.runeName"));
-            System.out.println(runeManager.getRuneNameFromRuneID(Juraforge.instance.getConfig().getString("craft.Speed.runeName")));
             return runeManager.createRuneItem(RuneManager.getRune(Juraforge.instance.getConfig().getString("craft.Speed.runeName")));
         }
 

@@ -21,9 +21,7 @@ public class RuneManager {
     }
 
     public void applyRune(ItemStack item, Runes rune) {
-        System.out.println("Applying rune: " + rune.getId());
         if (!canApplyRune(item, rune)) {
-            System.out.println("Rune cannot be applied to this item.");
             throw new IllegalArgumentException("Rune cannot be applied to this item.");
         }
 
@@ -41,7 +39,6 @@ public class RuneManager {
                     String[] parts = lore.get(i).split(" - ");
                     int currentLevel = Integer.parseInt(parts[1]);
                     if (currentLevel == rune.getLevel()) {
-                        System.out.println("Rune already exists at the same level.");
                         runeUpgrade = true;
                         break;
                     } else {
@@ -52,16 +49,13 @@ public class RuneManager {
 
             if (runeUpgrade) {
                 upgradeRune(item, rune);
-                System.out.println("Rune upgraded successfully.");
             } else {
                 lore.removeIf(line -> line.startsWith(hex("&a✦ ")));
                 lore.add(hex("&a✦ " + rune.getName() + " - " + rune.getLevel()));
                 meta.setLore(lore);
                 item.setItemMeta(meta);
-                System.out.println("Rune applied successfully.");
             }
         } else {
-            System.out.println("ItemMeta is null.");
         }
     }
 
@@ -77,7 +71,6 @@ public class RuneManager {
                         lore.set(i, hex("&a✦ " + rune.getName() + " - " + (currentLevel + 1)));
                         meta.setLore(lore);
                         item.setItemMeta(meta);
-                        System.out.println("Rune upgraded to level " + (currentLevel + 1));
                         return;
                     }
                 }
@@ -87,7 +80,6 @@ public class RuneManager {
 
     public boolean canApplyRune(ItemStack item, Runes rune) {
         boolean canApply = rune.getAllowedItems().contains(item.getType().toString());
-        System.out.println("Can apply rune: " + canApply);
         return canApply;
     }
 
@@ -125,7 +117,6 @@ public class RuneManager {
     }
 
     public Runes getRuneFromItem(ItemStack item) {
-        System.out.println("Getting rune from item");
         ItemMeta meta = item.getItemMeta();
         if (meta != null && meta.getLore() != null) {
             for (String lore : meta.getLore()) {
