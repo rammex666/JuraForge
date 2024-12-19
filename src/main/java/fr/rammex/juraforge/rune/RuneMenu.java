@@ -1,5 +1,6 @@
 package fr.rammex.juraforge.rune;
 
+import fr.rammex.juraforge.config.menu.ConfigRunesMainMenu;
 import fr.rammex.juraforge.rune.RuneManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -104,7 +105,7 @@ public class RuneMenu implements Listener {
                     }
                 }
             } else if (clickedItem.getType() == Material.REDSTONE && clickedItem.getItemMeta().getDisplayName() == ChatColor.translateAlternateColorCodes('&',"&c&lConfig")) {
-
+                ConfigRunesMainMenu.getConfigRunesMenu((Player) event.getWhoClicked());
             } else if (clickedItem != null && (clickedItem.getType() == Material.GREEN_STAINED_GLASS_PANE || clickedItem.getType() == Material.GRAY_STAINED_GLASS_PANE)) {
                 event.setCancelled(true);
             }

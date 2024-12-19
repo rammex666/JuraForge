@@ -4,6 +4,7 @@ import dev.aurelium.auraskills.api.AuraSkillsApi;
 import dev.aurelium.auraskills.api.AuraSkillsProvider;
 import fr.rammex.juraforge.commands.ForgeGiveCommand;
 import fr.rammex.juraforge.commands.RunesCommand;
+import fr.rammex.juraforge.config.events.OnClickRuneConfigMenu;
 import fr.rammex.juraforge.craft.events.CraftRuneTableListener;
 import fr.rammex.juraforge.rune.RuneEffectListener;
 import fr.rammex.juraforge.rune.RuneManager;
@@ -43,6 +44,7 @@ public final class Juraforge extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new CraftRuneTableListener(), this);
 
+        getServer().getPluginManager().registerEvents(new OnClickRuneConfigMenu(), this);
 
         AuraSkillsApi auraSkillsApi = AuraSkillsProvider.getInstance();
         if (auraSkillsApi == null) {
