@@ -1,5 +1,6 @@
 package fr.rammex.juraforge.commands;
 
+import fr.rammex.juraforge.Juraforge;
 import fr.rammex.juraforge.rune.RuneManager;
 import fr.rammex.juraforge.rune.RuneMenu;
 import fr.rammex.juraforge.rune.Runes;
@@ -26,6 +27,16 @@ public class RunesCommand implements CommandExecutor {
 
         if (args.length == 0) {
             RuneMenu.openMenu(player);
+            return true;
+        }
+
+        if(args[0].equals("reload")){
+            if(!player.hasPermission("runes.reload")) {
+                player.sendMessage("You do not have permission to use this command.");
+                return false;
+            }
+            Juraforge.instance.reloadConfig();
+            player.sendMessage("Runes reloaded.");
             return true;
         }
 
